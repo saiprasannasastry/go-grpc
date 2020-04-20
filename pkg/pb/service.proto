@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package service;
+option go_package = ".;albumgpb";
+message Album {
+    string id = 1;
+    string userId = 2;
+    string title = 3;
+}
+message albumreq {
+    string id = 1;
+}
+
+message albumresp {
+    Album album = 1;
+}
+message ListAlbumRequest {}
+
+message ListAlbumResponse {
+    Album album = 1;
+}
+service AlbumService{
+rpc GetAlbum(albumreq) returns (albumresp);
+rpc ListAlbum(ListAlbumRequest) returns ( stream ListAlbumResponse);
+}
